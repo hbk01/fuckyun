@@ -1,0 +1,17 @@
+// 查询时返回的json示例
+{
+  "code": 0,
+  "msg": "success.",
+  "data": [
+    {
+      "username": "dsfafwef",
+      "password": "awegwef"
+    },
+    {
+      "username": "weqgw",
+      "password": "wregwa"
+    }
+  ]
+}
+
+
