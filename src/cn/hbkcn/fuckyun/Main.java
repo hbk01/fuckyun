@@ -3,9 +3,11 @@ package cn.hbkcn.fuckyun;
 import fuckyun.listener.DownListener;
 import fuckyun.listener.UpListener;
 import fuckyun.main.FuckYun;
-import fuckyun.main.Limit;
-import fuckyun.main.Where;
-import java.util.ArrayList;
+import fuckyun.network.Http;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 /**
  * 测试
@@ -21,23 +23,39 @@ public class Main {
         UpListener upListener = (code, msg) -> System.out.println(code + ": " + msg);
         DownListener<User> downListener = System.out::println;
 
-        Where where = new Where();
-        // username LIKE 0004%
-        where.add("username", "0004%", Where.Type.LIKE);
+//        LinkedList<File> files = new LinkedList<>();
+//        files.add(new File("C:\\Users\\hbk\\Desktop\\ssr.txt"));
+//        files.add(new File("C:\\Users\\hbk\\Desktop\\宝塔.txt"));
+//        fuckYun.uploadFile(files, upListener);
 
-        // LIMIT 5
-        Limit limit = new Limit(5);
 
-        // 查询
-        fuckYun.query(where, limit, User.class, (DownListener<User>) result -> {
-            int code = result.getCode();
-            String message = result.getMessage();
-            System.out.println(code + ": " + message);
-            ArrayList<User> data = result.getData();
-            for (User user : data) {
-                System.out.println(user.getUsername() + user.getPassword());
-            }
-        });
+        LinkedList<File> files = new LinkedList<>();
+        files.add(new File("C:\\Users\\hbk\\Desktop\\ssr.txt"));
+        files.add(new File("C:\\Users\\hbk\\Pictures\\视频项目\\Windows7.png"));
+        files.add(new File("D:\\students.json"));
+
+        fuckYun.uploadFile(files, upListener);
+
+
+//
+
+//        Where where = new Where();
+//        // username LIKE 0004%
+//        where.add("username", "0004%", Where.Type.LIKE);
+//
+//        // LIMIT 5
+//        Limit limit = new Limit(5);
+//
+//        // 查询
+//        fuckYun.query(where, limit, User.class, (DownListener<User>) result -> {
+//            int code = result.getCode();
+//            String message = result.getMessage();
+//            System.out.println(code + ": " + message);
+//            ArrayList<User> data = result.getData();
+//            for (User user : data) {
+//                System.out.println(user.getUsername() + user.getPassword());
+//            }
+//        });
 
 //         删除对象
 //        fuckYun.delete(where, listener);

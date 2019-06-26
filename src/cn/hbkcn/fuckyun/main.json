@@ -1,17 +1,10 @@
-// 查询时返回的json示例
 {
   "code": 0,
-  "msg": "success.",
-  "data": [
-    {
-      "username": "dsfafwef",
-      "password": "awegwef"
-    },
-    {
-      "username": "weqgw",
-      "password": "wregwa"
-    }
-  ]
+  "msg": "Success",
+  "url": {
+    "Windows7.png": "/test/file/9eafc6172b386f2258c4d475cebe3e41.png",
+    "students.json": "/test/file/2c6d54ae18b4e56c78674dae69c47f25.json",
+    "ssr.txt": "/test/file/dd131f074e60f77b56082c2c7706ba21.txt"
+  }
 }
-
 

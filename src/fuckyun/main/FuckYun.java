@@ -6,8 +6,12 @@ import fuckyun.listener.DownListener;
 import fuckyun.listener.UpListener;
 import fuckyun.network.NetWork;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.LinkedList;
+
+// TODO: lambda转换成常规方式，兼容jdk1.8以下
 
 /**
  * 操蛋云主类，将请求封装并发送
@@ -150,6 +154,26 @@ public class FuckYun {
      */
     public <T> void query(Class<? extends FuckYunObject> type, DownListener<T> listener){
         NetWork.query(table, "", "", type, listener);
+    }
+
+    /**
+     * 上传一个文件
+     * @param file 文件
+     * @param listener 监听器
+     */
+    public void uploadFile(File file, UpListener listener){
+        LinkedList<File> list = new LinkedList<>();
+        list.add(file);
+        NetWork.uploadFile(list, listener);
+    }
+
+    /**
+     * 上传多个文件
+     * @param files 文件列表
+     * @param listener 监听器
+     */
+    public void uploadFile(LinkedList<File> files, UpListener listener){
+        NetWork.uploadFile(files, listener);
     }
 
     /**

@@ -6,9 +6,11 @@ import fuckyun.listener.DownListener;
 import fuckyun.listener.UpListener;
 import fuckyun.main.Result;
 
+import java.io.File;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 /**
  * 所有的网络请求从这里发送出去
@@ -85,6 +87,11 @@ public class NetWork {
          * 查询表
          */
         static final String QUERY = "query";
+
+        /**
+         * 上传文件
+         */
+        static final String UPLOAD_FILE = "upload_file";
     }
 
     // 以下的字段是在参数设置中经常用到的
@@ -101,8 +108,11 @@ public class NetWork {
         params.put(TABLE, table);
         params.put(KEYS, keys.toString());
         params.put(VALUES, values.toString());
-        Http.doPost(url, params, header, msg -> {
-            listener.onUp(getCode(msg), getMsg(msg));
+        Http.doPost(url, params, header, new Http.Ok() {
+            @Override
+            public void ok(String msg) {
+                listener.onUp(getCode(msg), getMsg(msg));
+            }
         });
     }
 
@@ -188,6 +198,14 @@ public class NetWork {
             }
             Result<T> result = new Result<T>(code, string, list);
             listener.onDown(result);
+        });
+    }
+
+    public static void uploadFile(LinkedList<File> files, UpListener listener){
+        resetParams();
+        params.put(METHOD, Method.UPLOAD_FILE);
+        Http.doPostFile(url, params, files, msg -> {
+            listener.onUp(getCode(msg), getMsg(msg));
         });
     }
 
