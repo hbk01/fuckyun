@@ -54,14 +54,14 @@ fuckYun.delete(where, ((code, msg) -> {
 }));
 ```
 ##### 4.2 删除所有数据
-```java
+```
 fuckYun.deleteAllData(((code, msg) -> {
     System.out.println(code + ": " + msg);
 }));
 ```
 
 ##### 4.3 删除表
-```java
+```
 fuckYun.deleteTable(((code, msg) -> {
     System.out.println(code + ": " + msg);
 }));
@@ -95,10 +95,26 @@ fuckYun.query(where, limit, User.class, new DownListener<User>(){
     }
 });
 ```
+#### 7.上传文件
+##### 7.1 上传单个文件
+```
+File file = new File(path);
+fuckYun.uploadFile(file, upListener);
+```
+
+##### 7.2 上传多个文件
+```
+LinkedList<File> files = new LinkedList<>();
+files.add(new File(path1));
+files.add(new File(path2));
+files.add(new File(path3));
+
+fuckYun.uploadFile(files, upListener);
+```
 
 ## 三、状态码列表
 #### 操蛋云状态码
-*   `0` 正常
+*  `0` 正常
 * `-1` 作者懒得搞错误码就用它，具体错误看msg
 * `100` 不安全的操作，该操作可能导致数据被意外删除
 * `101` 初始化id错误
